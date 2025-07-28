@@ -1,0 +1,36 @@
+# Logs
+*.log
+error_log
+
+# Arquivos de configuração local
+config/local.php
+.env
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Cache
+cache/
+temp/
+tmp/
+
+# Dependências
+vendor/
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backup
+*.bak
+*.backup
+
+# Uploads (temporário)
+uploads/temp/
+
+# Docker
+.docker/
