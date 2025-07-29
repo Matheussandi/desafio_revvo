@@ -317,3 +317,19 @@ function performSearch() {
         showMessage('Digite algo para pesquisar!', 'warning');
     }
 }
+
+// Função para mostrar notificação ao clicar em "VER CURSO"
+function showCourseNotification() {
+    showMessage('Esta funcionalidade será implementada em breve! Em desenvolvimento...', 'info');
+}
+
+// Função para rolagem suave para a seção de cursos
+function scrollToCourses() {
+    const coursesSection = document.getElementById('courses-section');
+    if (coursesSection) {
+        coursesSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
