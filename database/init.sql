@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS leo_learning;
+CREATE DATABASE IF NOT EXISTS leo_learning CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE leo_learning;
 
 CREATE TABLE IF NOT EXISTS courses (
@@ -9,7 +9,9 @@ CREATE TABLE IF NOT EXISTS courses (
     is_new BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+DELETE FROM courses;
 
 INSERT INTO courses (title, description, image, is_new) VALUES
 ('PHP para Iniciantes', 'Curso completo de PHP do básico ao avançado com projetos práticos e exemplos reais.', NULL, TRUE),

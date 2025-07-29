@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    showMessage('Course added successfully!', 'success');
+                    showMessage('Curso adicionado com sucesso!', 'success');
                     closeAddCourseModal();
                     
                     // Adicionar novo card ao DOM
@@ -405,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error creating course:', error);
-                showMessage('Error creating course. Please try again.', 'error');
+                showMessage('Erro ao criar curso. Tente novamente.', 'error');
             })
             .finally(() => {
                 submitBtn.textContent = originalText;
@@ -435,13 +435,13 @@ function addCourseToGrid(course) {
     
     courseCard.innerHTML = `
         <div class="course-image" style="background-image: url('${imageUrl}');">
-            ${course.is_new ? '<span class="course-badge new">New</span>' : ''}
+            ${course.is_new ? '<span class="course-badge new">Novo</span>' : ''}
         </div>
         <div class="course-content">
             <h3 class="course-title">${course.title}</h3>
             <p class="course-description">${course.description}</p>
             <div class="course-actions">
-                <button class="btn-course" onclick="viewCourse(${course.id})">VIEW COURSE</button>
+                <button class="btn-course" onclick="viewCourse(${course.id})">VER CURSO</button>
             </div>
         </div>
     `;

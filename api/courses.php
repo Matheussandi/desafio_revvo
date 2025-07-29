@@ -33,7 +33,7 @@ try {
             $is_new = isset($_POST['is_new']) ? (bool)$_POST['is_new'] : true;
             
             if (empty($title) || empty($description)) {
-                jsonResponse(false, 'Title and description are required.');
+                jsonResponse(false, 'Título e descrição são obrigatórios.');
             }
             
             // Process image upload
@@ -70,35 +70,35 @@ try {
             
             if ($courseId) {
                 $newCourse = $course->getById($courseId);
-                jsonResponse(true, 'Course created successfully!', $newCourse);
+                jsonResponse(true, 'Curso criado com sucesso!', $newCourse);
             } else {
-                jsonResponse(false, 'Error creating course.');
+                jsonResponse(false, 'Erro ao criar curso.');
             }
             break;
             
         case 'list':
             $courses = $course->getAll();
-            jsonResponse(true, 'Courses loaded successfully.', $courses);
+            jsonResponse(true, 'Cursos carregados com sucesso.', $courses);
             break;
             
         case 'get':
             $id = (int) ($_GET['id'] ?? 0);
             if ($id <= 0) {
-                jsonResponse(false, 'Course ID is required.');
+                jsonResponse(false, 'ID do curso é obrigatório.');
             }
             
             $courseData = $course->getById($id);
             if ($courseData) {
-                jsonResponse(true, 'Course found.', $courseData);
+                jsonResponse(true, 'Curso encontrado.', $courseData);
             } else {
-                jsonResponse(false, 'Course not found.');
+                jsonResponse(false, 'Curso não encontrado.');
             }
             break;
             
         case 'update':
             $id = (int) ($_POST['id'] ?? 0);
             if ($id <= 0) {
-                jsonResponse(false, 'Course ID is required.');
+                jsonResponse(false, 'ID do curso é obrigatório.');
             }
             
             // Validate required data
@@ -107,13 +107,13 @@ try {
             $is_new = isset($_POST['is_new']) ? (bool)$_POST['is_new'] : true;
             
             if (empty($title) || empty($description)) {
-                jsonResponse(false, 'Title and description are required.');
+                jsonResponse(false, 'Título e descrição são obrigatórios.');
             }
             
             // Get current course data
             $currentCourse = $course->getById($id);
             if (!$currentCourse) {
-                jsonResponse(false, 'Course not found.');
+                jsonResponse(false, 'Curso não encontrado.');
             }
             
             $image = $currentCourse['image']; // Keep current image by default
@@ -155,29 +155,29 @@ try {
             
             if ($course->update($id, $data)) {
                 $updatedCourse = $course->getById($id);
-                jsonResponse(true, 'Course updated successfully!', $updatedCourse);
+                jsonResponse(true, 'Curso atualizado com sucesso!', $updatedCourse);
             } else {
-                jsonResponse(false, 'Error updating course.');
+                jsonResponse(false, 'Erro ao atualizar curso.');
             }
             break;
             
         case 'delete':
             $id = (int) ($_POST['id'] ?? 0);
             if ($id <= 0) {
-                jsonResponse(false, 'Course ID is required.');
+                jsonResponse(false, 'ID do curso é obrigatório.');
             }
             
             if ($course->delete($id)) {
-                jsonResponse(true, 'Course deleted successfully!');
+                jsonResponse(true, 'Curso excluído com sucesso!');
             } else {
-                jsonResponse(false, 'Error deleting course.');
+                jsonResponse(false, 'Erro ao excluir curso.');
             }
             break;
             
         default:
-            jsonResponse(false, 'Unknown action.');
+            jsonResponse(false, 'Ação desconhecida.');
     }
     
 } catch (Exception $e) {
-    jsonResponse(false, 'Server error: ' . $e->getMessage());
+    jsonResponse(false, 'Erro no servidor: ' . $e->getMessage());
 }

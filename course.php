@@ -81,7 +81,7 @@ try {
                             <div class="course-meta">
                                 <div class="meta-item">
                                     <i class="bi bi-calendar"></i>
-                                    <span>Created: <?php echo date('M d, Y', strtotime($course['created_at'])); ?></span>
+                                    <span>Criado em: <?php echo date('M d, Y', strtotime($course['created_at'])); ?></span>
                                 </div>
                                 <?php if ($course['updated_at'] !== $course['created_at']): ?>
                                 <div class="meta-item">

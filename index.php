@@ -152,21 +152,21 @@ try {
                             <div class="course-card" data-course-id="<?php echo $course['id']; ?>">
                                 <div class="course-image" style="background-image: url('<?php echo !empty($course['image']) ? $course['image'] : 'assets/images/default-course.svg'; ?>');">
                                     <?php if ($course['is_new']): ?>
-                                        <span class="course-badge new">New</span>
+                                        <span class="course-badge new">Novo</span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="course-content">
                                     <h3 class="course-title"><?php echo htmlspecialchars($course['title']); ?></h3>
                                     <p class="course-description"><?php echo htmlspecialchars($course['description']); ?></p>
                                     <div class="course-actions">
-                                        <button class="btn-course" onclick="viewCourse(<?php echo $course['id']; ?>)">VIEW COURSE</button>
+                                        <button class="btn-course" onclick="viewCourse(<?php echo $course['id']; ?>)">VER CURSO</button>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="no-courses">
-                            <p>No courses registered yet. Click "Add Course" to get started!</p>
+                            <p>Nenhum curso cadastrado até agora. Clique em "Adicionar Curso" para começar!</p>
                         </div>
                     <?php endif; ?>
 
@@ -174,8 +174,8 @@ try {
                     <div class="course-card add-course-card" onclick="showAddCourseModal()">
                         <div class="add-course-content">
                             <i class="bi bi-plus-circle-fill icon"></i>
-                            <h3>Add Course</h3>
-                            <p>Click here to add a new course to your list</p>
+                            <h3>Adicionar Curso</h3>
+                            <p>Clique aqui para adicionar um novo curso</p>
                         </div>
                     </div>
                 </div>
@@ -234,37 +234,37 @@ try {
     <div id="addCourseModal" class="modal">
         <div class="modal-content course-modal">
             <div class="modal-header">
-                <h2>Add New Course</h2>
+                <h2>Adicionar Novo Curso</h2>
                 <button class="modal-close" onclick="closeAddCourseModal()">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="addCourseForm" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="courseTitle">Course Title *</label>
-                        <input type="text" id="courseTitle" name="title" required placeholder="e.g. PHP for Beginners">
+                        <label for="courseTitle">Título do Curso *</label>
+                        <input type="text" id="courseTitle" name="title" required placeholder="e.g. PHP para Iniciantes">
                     </div>
                     
                     <div class="form-group">
-                        <label for="courseDescription">Description *</label>
-                        <textarea id="courseDescription" name="description" required placeholder="Describe the course content..." rows="4"></textarea>
+                        <label for="courseDescription">Descrição *</label>
+                        <textarea id="courseDescription" name="description" required placeholder="Descreva o conteúdo do curso..." rows="4"></textarea>
                     </div>
                     
                     <div class="form-group">
-                        <label for="courseImage">Course Image</label>
+                        <label for="courseImage">Imagem do Curso</label>
                         <input type="file" id="courseImage" name="image" accept="image/*">
-                        <small class="form-help">Accepted formats: JPG, PNG, WebP (max. 2MB)</small>
+                        <small class="form-help">Formatos aceitos: JPG, PNG, WebP (máx. 2MB)</small>
                     </div>
                     
                     <div class="form-group">
                         <label class="checkbox-label">
                             <input type="checkbox" id="courseIsNew" name="is_new" checked>
-                            Mark as new course
+                            Marcar como curso novo
                         </label>
                     </div>
                     
                     <div class="form-actions">
-                        <button type="button" class="btn-secondary" onclick="closeAddCourseModal()">Cancel</button>
-                        <button type="submit" class="btn-primary">Add Course</button>
+                        <button type="button" class="btn-secondary" onclick="closeAddCourseModal()">Cancelar</button>
+                        <button type="submit" class="btn-primary">Adicionar Curso</button>
                     </div>
                 </form>
             </div>

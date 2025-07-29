@@ -36,7 +36,7 @@ function deleteCourse(courseId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                showMessage('Course deleted successfully!', 'success');
+                showMessage('Curso excluído com sucesso!', 'success');
                 // Redirect to home page after 2 seconds
                 setTimeout(() => {
                     window.location.href = 'index.php';
@@ -47,14 +47,14 @@ function deleteCourse(courseId) {
         })
         .catch(error => {
             console.error('Error deleting course:', error);
-            showMessage('Error deleting course. Please try again.', 'error');
+            showMessage('Erro ao excluir curso. Tente novamente.', 'error');
         });
     }
 }
 
 // Start course (placeholder)
 function startCourse(courseId) {
-    showMessage('Course start functionality will be implemented soon!', 'info');
+    showMessage('Funcionalidade de iniciar curso será implementada em breve!', 'info');
 }
 
 // Process edit course form
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    showMessage('Course updated successfully!', 'success');
+                    showMessage('Curso atualizado com sucesso!', 'success');
                     closeEditCourseModal();
                     
                     // Reload page to show updated data
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 console.error('Error updating course:', error);
-                showMessage('Error updating course. Please try again.', 'error');
+                showMessage('Erro ao atualizar curso. Tente novamente.', 'error');
             })
             .finally(() => {
                 submitBtn.textContent = originalText;
