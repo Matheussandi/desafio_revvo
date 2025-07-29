@@ -20,11 +20,11 @@ body {
 
 /* Header e Navegação */
 .navbar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: white;
+    color: #333;
     padding: 1rem 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: relative;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .navbar .container {
@@ -34,29 +34,119 @@ body {
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: 600;
-    letter-spacing: -0.5px;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #333;
+    letter-spacing: -1px;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-.nav-links {
+.navbar-right {
     display: flex;
-    list-style: none;
-    gap: 2.5rem;
+    align-items: center;
+    gap: 2rem;
 }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
+/* Campo de Pesquisa */
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 300px;
+    padding: 12px 45px 12px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    outline: none;
     transition: all 0.3s ease;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    background-color: #f8f9fa;
 }
 
-.nav-links a:hover {
-    background-color: rgba(255,255,255,0.1);
-    transform: translateY(-1px);
+.search-input:focus {
+    border-color: #667eea;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-input::placeholder {
+    color: #adb5bd;
+}
+
+.search-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+}
+
+/* Perfil do Usuário */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.user-profile:hover {
+    background-color: #f8f9fa;
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #e9ecef;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.welcome-text {
+    font-size: 0.75rem;
+    color: #6c757d;
+    line-height: 1;
+}
+
+.user-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.2;
+}
+
+.profile-dropdown {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 4px;
+    transition: all 0.3s ease;
+}
+
+.profile-dropdown:hover {
+    color: #667eea;
 }
 
 /* Hero Section com Slider */
@@ -332,41 +422,77 @@ body {
 
 /* Footer */
 footer {
-    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-    color: white;
-    text-align: center;
-    padding: 2rem 0;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    padding: 3rem 0 1rem;
     margin-top: 3rem;
+    border-top: 1px solid #e9ecef;
 }
 
 .footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 2rem;
+    gap: 3rem;
 }
 
-.footer-section h3 {
+.footer-left {
+    flex: 1;
+    max-width: 400px;
+}
+
+.footer-logo h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #adb5bd;
     margin-bottom: 1rem;
-    color: #ecf0f1;
+    letter-spacing: 2px;
 }
 
-.footer-section p {
-    opacity: 0.9;
+.footer-description {
+    color: #6c757d;
     line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
 }
 
-.social-links {
+.footer-right {
+    display: flex;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.footer-contact h4,
+.footer-social h4 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #adb5bd;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.footer-contact p {
+    color: #6c757d;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.footer-contact p:first-of-type {
+    margin-top: 0;
+}
+
+.social-icons {
     display: flex;
     gap: 1rem;
-    justify-content: center;
-    margin-top: 1rem;
+    align-items: center;
 }
 
-.social-links a {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255,255,255,0.1);
+.social-icon {
+    width: 35px;
+    height: 35px;
+    background-color: #adb5bd;
     color: white;
     display: flex;
     align-items: center;
@@ -376,15 +502,39 @@ footer {
     transition: all 0.3s ease;
 }
 
-.social-links a:hover {
-    background-color: rgba(255,255,255,0.2);
+.social-icon:hover {
+    background-color: #6c757d;
     transform: translateY(-2px);
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 1rem;
-    opacity: 0.8;
+    border-top: 1px solid #e9ecef;
+    padding-top: 1.5rem;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-bottom p {
+    color: #adb5bd;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.debug-reset-btn {
+    background: #adb5bd;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.debug-reset-btn:hover {
+    background: #6c757d;
 }
 
 /* Modal de Boas-vindas */
@@ -540,8 +690,19 @@ footer {
         gap: 1rem;
     }
     
-    .nav-links {
+    .navbar-right {
+        flex-direction: column;
         gap: 1rem;
+        width: 100%;
+    }
+    
+    .search-input {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .user-profile {
+        justify-content: center;
     }
     
     .slide-content h2 {
@@ -564,5 +725,43 @@ footer {
     
     .hero-slider {
         height: 400px;
+    }
+    
+    /* Footer responsivo */
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-right {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+/* Responsivo para telas pequenas */
+@media (max-width: 480px) {
+    .footer-content {
+        gap: 1.5rem;
+    }
+    
+    .footer-right {
+        gap: 1.5rem;
+    }
+    
+    .footer-logo h2 {
+        font-size: 2rem;
+    }
+    
+    .social-icons {
+        justify-content: center;
     }
 }

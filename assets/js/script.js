@@ -27,6 +27,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Funcionalidade de pesquisa
+    const searchInput = document.querySelector('.search-input');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+    
+    const searchBtn = document.querySelector('.search-btn');
+    if (searchBtn) {
+        searchBtn.addEventListener('click', performSearch);
+    }
+    
+    // Event listener para o perfil do usuário
+    const userProfile = document.querySelector('.user-profile');
+    if (userProfile) {
+        userProfile.addEventListener('click', function() {
+            showMessage('Menu de usuário será implementado em breve!', 'info');
+        });
+    }
+    
     // Função para mostrar mensagens
     window.showMessage = function(message, type = 'info') {
         const messageDiv = document.createElement('div');
@@ -279,4 +302,18 @@ function resetFirstVisit() {
     localStorage.removeItem('meuscursos_visited');
     localStorage.removeItem('meuscursos_visit_date');
     showMessage('Modal resetada! Recarregue a página para testar.', 'info');
+}
+
+// Função de pesquisa
+function performSearch() {
+    const searchInput = document.querySelector('.search-input');
+    const query = searchInput.value.trim();
+    
+    if (query) {
+        showMessage(`Pesquisando por: "${query}"`, 'info');
+        // Aqui você pode implementar a lógica de pesquisa real
+        // Por exemplo: filtrar os cursos na página ou redirecionar para página de resultados
+    } else {
+        showMessage('Digite algo para pesquisar!', 'warning');
+    }
 }
