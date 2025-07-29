@@ -88,6 +88,10 @@ body {
     transition: all 0.3s ease;
 }
 
+.search-btn i {
+    font-size: 16px;
+}
+
 .search-btn:hover {
     background-color: rgba(102, 126, 234, 0.1);
     color: #667eea;
@@ -143,6 +147,10 @@ body {
     cursor: pointer;
     padding: 4px;
     transition: all 0.3s ease;
+}
+
+.profile-dropdown i {
+    font-size: 12px;
 }
 
 .profile-dropdown:hover {
@@ -259,6 +267,10 @@ body {
     z-index: 10;
 }
 
+.slider-arrow i {
+    font-size: 20px;
+}
+
 .slider-arrow:hover {
     background-color: rgba(255,255,255,0.3);
 }
@@ -370,6 +382,11 @@ body {
     color: #666;
 }
 
+.course-meta i {
+    margin-right: 5px;
+    color: #667eea;
+}
+
 .btn-course {
     width: 100%;
     padding: 12px 20px;
@@ -418,6 +435,7 @@ body {
     font-size: 3rem;
     margin-bottom: 1rem;
     display: block;
+    color: #667eea;
 }
 
 /* Footer */
@@ -500,6 +518,10 @@ footer {
     border-radius: 50%;
     text-decoration: none;
     transition: all 0.3s ease;
+}
+
+.social-icon i {
+    font-size: 18px;
 }
 
 .social-icon:hover {
@@ -721,6 +743,10 @@ footer {
         width: 40px;
         height: 40px;
         font-size: 1.2rem;
+    }
+    
+    .slider-arrow i {
+        font-size: 16px;
     }
     
     .hero-slider {
