@@ -41,9 +41,10 @@ try {
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $uploadDir = '../assets/images/courses/';
                 
-                // Create directory if it doesn't exist
+                // Create directory if it doesn't exist with proper permissions
                 if (!is_dir($uploadDir)) {
-                    mkdir($uploadDir, 0755, true);
+                    mkdir($uploadDir, 0775, true);
+                    chmod($uploadDir, 0775);
                 }
                 
                 $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
@@ -123,7 +124,8 @@ try {
                 $uploadDir = '../assets/images/courses/';
                 
                 if (!is_dir($uploadDir)) {
-                    mkdir($uploadDir, 0755, true);
+                    mkdir($uploadDir, 0775, true);
+                    chmod($uploadDir, 0775);
                 }
                 
                 $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));

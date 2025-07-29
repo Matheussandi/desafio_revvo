@@ -1,8 +1,4 @@
-/**
- * JavaScript for course detail page
- */
-
-// Show edit course modal
+// Mostrar modal de edição do curso
 function editCourse(courseId) {
     const modal = document.getElementById('editCourseModal');
     if (modal) {
@@ -12,7 +8,7 @@ function editCourse(courseId) {
     }
 }
 
-// Close edit course modal
+// Fechar modal do curso de edição
 function closeEditCourseModal() {
     const modal = document.getElementById('editCourseModal');
     if (modal) {
@@ -22,9 +18,9 @@ function closeEditCourseModal() {
     }
 }
 
-// Delete course
+// Excluir curso
 function deleteCourse(courseId) {
-    if (confirm('Are you sure you want to delete this course? This action cannot be undone.')) {
+    if (confirm('Tem certeza de que deseja excluir este curso? Esta ação não pode ser desfeita.')) {
         const formData = new FormData();
         formData.append('action', 'delete');
         formData.append('id', courseId);
@@ -37,10 +33,9 @@ function deleteCourse(courseId) {
         .then(data => {
             if (data.success) {
                 showMessage('Curso excluído com sucesso!', 'success');
-                // Redirect to home page after 2 seconds
                 setTimeout(() => {
                     window.location.href = 'index.php';
-                }, 2000);
+                }, 1000);
             } else {
                 showMessage(data.message, 'error');
             }
@@ -52,12 +47,7 @@ function deleteCourse(courseId) {
     }
 }
 
-// Start course (placeholder)
-function startCourse(courseId) {
-    showMessage('Funcionalidade de iniciar curso será implementada em breve!', 'info');
-}
-
-// Process edit course form
+// Processar formulário de edição do curso
 document.addEventListener('DOMContentLoaded', function() {
     const editCourseForm = document.getElementById('editCourseForm');
     if (editCourseForm) {
@@ -66,11 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const formData = new FormData(this);
             formData.append('action', 'update');
-            
-            // Show loading
+
+            // Show loading state
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Updating...';
+            submitBtn.textContent = 'Atualizando...';
             submitBtn.disabled = true;
             
             fetch('api/courses.php', {
@@ -83,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     showMessage('Curso atualizado com sucesso!', 'success');
                     closeEditCourseModal();
                     
-                    // Reload page to show updated data
                     setTimeout(() => {
                         location.reload();
                     }, 1500);
@@ -103,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Close modals when clicking outside
+// Fechar modais ao clicar fora
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('modal')) {
         if (e.target.id === 'editCourseModal') {
@@ -112,20 +101,19 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Close modals with ESC
+// Feche os modais com ESC
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeEditCourseModal();
     }
 });
 
-// Message display function (reuse from main script)
+// Função para exibir mensagens de feedback
 window.showMessage = function(message, type = 'info') {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message message-${type}`;
     messageDiv.textContent = message;
     
-    // Styles for message
     messageDiv.style.cssText = `
         position: fixed;
         top: 20px;
@@ -140,7 +128,6 @@ window.showMessage = function(message, type = 'info') {
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     `;
     
-    // Colors based on type
     const colors = {
         'success': '#28a745',
         'error': '#dc3545',
@@ -152,7 +139,6 @@ window.showMessage = function(message, type = 'info') {
     
     document.body.appendChild(messageDiv);
     
-    // Remove message after 4 seconds
     setTimeout(() => {
         messageDiv.style.animation = 'slideOut 0.3s ease-out';
         setTimeout(() => {

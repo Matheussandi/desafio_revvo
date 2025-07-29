@@ -34,7 +34,44 @@ O "LEO Learning" é uma plataforma completa de gerenciamento de cursos que combi
 - **Modo Debug** - Ferramentas de desenvolvimento integradas
 - **Configuração por Ambiente** - Sistema robusto de variáveis de ambiente
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Como Executar o Projeto
+
+### Pré-requisitos
+- Docker e Docker Compose instalados
+- Git para clonar o repositório
+
+### Passos para Instalação
+
+1. **Clone o repositório**
+```bash
+git clone <seu-repositorio>
+cd desafio_revvo
+```
+
+2. **Configure as permissões** (importante!)
+```bash
+./setup-permissions.sh
+```
+
+3. **Execute o projeto com Docker Compose**
+```bash
+docker compose up --build
+```
+
+4. **Acesse a aplicação**
+- Site principal: http://localhost:8080
+- phpMyAdmin: http://localhost:8081
+
+### ⚠️ Importante - Permissões de Upload
+
+Se você estiver configurando o projeto pela primeira vez ou em uma nova máquina, execute o script de permissões para garantir que o upload de imagens funcione corretamente:
+
+```bash
+chmod +x setup-permissions.sh
+./setup-permissions.sh
+```
+
+Este script configura as permissões necessárias para o diretório `assets/images/courses/` onde as imagens dos cursos são armazenadas.
 
 ### Frontend
 - **HTML5** - Estrutura semântica moderna

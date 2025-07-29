@@ -47,12 +47,6 @@ try {
                     <div class="logo">
                         <img src="assets/images/logo.svg" alt="LEO Learning" class="logo-img">
                     </div>
-                    
-                    <div class="breadcrumb">
-                        <a href="index.php" class="breadcrumb-link">
-                            <i class="bi bi-arrow-left"></i> Back to Courses
-                        </a>
-                    </div>
                 </div>
             </div>
         </nav>
@@ -86,7 +80,7 @@ try {
                                 <?php if ($course['updated_at'] !== $course['created_at']): ?>
                                 <div class="meta-item">
                                     <i class="bi bi-pencil"></i>
-                                    <span>Updated: <?php echo date('M d, Y', strtotime($course['updated_at'])); ?></span>
+                                    <span>Atualizado em: <?php echo date('M d, Y', strtotime($course['updated_at'])); ?></span>
                                 </div>
                                 <?php endif; ?>
                             </div>
@@ -95,8 +89,8 @@ try {
 
                     <!-- Course Actions -->
                     <div class="course-actions-bar">
-                        <button class="btn-primary" onclick="startCourse(<?php echo $course['id']; ?>)">
-                            <i class="bi bi-play-fill"></i> Start Course
+                        <button class="btn-secondary" onclick="window.location.href='index.php'">
+                            <i class="bi bi-arrow-left"></i> Voltar
                         </button>
                         <button class="btn-secondary" onclick="editCourse(<?php echo $course['id']; ?>)">
                             <i class="bi bi-pencil"></i> Edit
@@ -104,17 +98,6 @@ try {
                         <button class="btn-danger" onclick="deleteCourse(<?php echo $course['id']; ?>)">
                             <i class="bi bi-trash"></i> Delete
                         </button>
-                    </div>
-
-                    <!-- Course Content Placeholder -->
-                    <div class="course-content-section">
-                        <h2>Course Content</h2>
-                        <div class="content-placeholder">
-                            <div class="placeholder-icon">
-                                <i class="bi bi-book"></i>
-                            </div>
-                            <p>Course content will be available soon. This feature is under development.</p>
-                        </div>
                     </div>
 
                 </div>
@@ -168,7 +151,7 @@ try {
     <div id="editCourseModal" class="modal">
         <div class="modal-content course-modal">
             <div class="modal-header">
-                <h2>Edit Course</h2>
+                <h2>Editar Curso</h2>
                 <button class="modal-close" onclick="closeEditCourseModal()">&times;</button>
             </div>
             <div class="modal-body">
@@ -176,23 +159,23 @@ try {
                     <input type="hidden" id="editCourseId" name="id" value="<?php echo $course['id']; ?>">
                     
                     <div class="form-group">
-                        <label for="editCourseTitle">Course Title *</label>
+                        <label for="editCourseTitle">Título do Curso *</label>
                         <input type="text" id="editCourseTitle" name="title" required 
                                value="<?php echo htmlspecialchars($course['title']); ?>">
                     </div>
                     
                     <div class="form-group">
-                        <label for="editCourseDescription">Description *</label>
+                        <label for="editCourseDescription">Descrição *</label>
                         <textarea id="editCourseDescription" name="description" required rows="4"><?php echo htmlspecialchars($course['description']); ?></textarea>
                     </div>
                     
                     <div class="form-group">
-                        <label for="editCourseImage">Course Image</label>
+                        <label for="editCourseImage">Imagem do Curso</label>
                         <input type="file" id="editCourseImage" name="image" accept="image/*">
-                        <small class="form-help">Leave empty to keep current image. Accepted formats: JPG, PNG, WebP (max. 2MB)</small>
+                        <small class="form-help">Deixe em branco para manter a imagem atual. Formatos aceitos: JPG, PNG, WebP (máx. 2MB)</small>
                         <?php if (!empty($course['image'])): ?>
                             <div class="current-image">
-                                <p>Current image:</p>
+                                <p>Imagem atual:</p>
                                 <img src="<?php echo $course['image']; ?>" alt="Current" class="current-image-preview">
                             </div>
                         <?php endif; ?>
@@ -201,13 +184,13 @@ try {
                     <div class="form-group">
                         <label class="checkbox-label">
                             <input type="checkbox" id="editCourseIsNew" name="is_new" <?php echo $course['is_new'] ? 'checked' : ''; ?>>
-                            Mark as new course
+                            Marcar como curso novo
                         </label>
                     </div>
                     
                     <div class="form-actions">
-                        <button type="button" class="btn-secondary" onclick="closeEditCourseModal()">Cancel</button>
-                        <button type="submit" class="btn-primary">Update Course</button>
+                        <button type="button" class="btn-secondary" onclick="closeEditCourseModal()">Cancelar</button>
+                        <button type="submit" class="btn-primary">Atualizar Curso</button>
                     </div>
                 </form>
             </div>
