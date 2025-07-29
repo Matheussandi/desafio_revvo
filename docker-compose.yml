@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   web:
     build: .
-    container_name: meus_cursos_web
+    container_name: leo_learning_web
     ports:
       - "8080:80"
     volumes:
@@ -13,11 +11,11 @@ services:
     env_file:
       - .env
     networks:
-      - meus_cursos_network
+      - leo_learning_network
 
   db:
     image: mysql:8.0
-    container_name: meus_cursos_db
+    container_name: leo_learning_db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASS}
@@ -30,11 +28,11 @@ services:
       - db_data:/var/lib/mysql
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - meus_cursos_network
+      - leo_learning_network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: meus_cursos_phpmyadmin
+    container_name: leo_learning_phpmyadmin
     restart: always
     ports:
       - "8081:80"
@@ -45,11 +43,11 @@ services:
     depends_on:
       - db
     networks:
-      - meus_cursos_network
+      - leo_learning_network
 
 volumes:
   db_data:
 
 networks:
-  meus_cursos_network:
+  leo_learning_network:
     driver: bridge

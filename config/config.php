@@ -9,12 +9,12 @@ loadEnv(__DIR__ . '/../.env');
 
 // Configurações do banco de dados
 define('DB_HOST', $_ENV['DB_HOST'] ?? 'localhost');
-define('DB_NAME', $_ENV['DB_NAME'] ?? 'meus_cursos');
+define('DB_NAME', $_ENV['DB_NAME'] ?? 'leo_learning');
 define('DB_USER', $_ENV['DB_USER'] ?? 'root');
 define('DB_PASS', $_ENV['DB_PASS'] ?? '');
 
 // Configurações gerais
-define('SITE_NAME', $_ENV['SITE_NAME'] ?? 'Meus Cursos');
+define('SITE_NAME', $_ENV['SITE_NAME'] ?? 'Leo Learning');
 define('SITE_URL', $_ENV['SITE_URL'] ?? 'http://localhost');
 define('TIMEZONE', $_ENV['TIMEZONE'] ?? 'America/Sao_Paulo');
 define('APP_ENV', $_ENV['APP_ENV'] ?? 'production');
@@ -39,5 +39,8 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Incluir classe de banco de dados
+// Include database class
 require_once __DIR__ . '/Database.php';
+
+// Include course class
+require_once __DIR__ . '/Course.php';

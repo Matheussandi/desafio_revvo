@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const addCourseCard = document.querySelector('.add-course-card');
     if (addCourseCard) {
         addCourseCard.addEventListener('click', function() {
-            showMessage('Funcionalidade de adicionar curso será implementada em breve!', 'info');
+            showAddCourseModal();
         });
     }
     
@@ -333,3 +333,138 @@ function scrollToCourses() {
         });
     }
 }
+
+// === FUNÇÕES PARA GERENCIAMENTO DE CURSOS ===
+
+// Mostrar modal de adicionar curso
+function showAddCourseModal() {
+    const modal = document.getElementById('addCourseModal');
+    if (modal) {
+        modal.classList.add('show');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Focar no primeiro campo
+        setTimeout(() => {
+            const firstInput = modal.querySelector('input[type="text"]');
+            if (firstInput) firstInput.focus();
+        }, 100);
+    }
+}
+
+// Fechar modal de adicionar curso
+function closeAddCourseModal() {
+    const modal = document.getElementById('addCourseModal');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        
+        // Limpar formulário
+        const form = document.getElementById('addCourseForm');
+        if (form) form.reset();
+    }
+}
+
+// Visualizar curso (ir para página de detalhes)
+function viewCourse(courseId) {
+    window.location.href = `course.php?id=${courseId}`;
+}
+
+// Processar formulário de adicionar curso
+document.addEventListener('DOMContentLoaded', function() {
+    const addCourseForm = document.getElementById('addCourseForm');
+    if (addCourseForm) {
+        addCourseForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            formData.append('action', 'create');
+            
+            // Mostrar loading
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Creating...';
+            submitBtn.disabled = true;
+            
+            fetch('api/courses.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showMessage('Course added successfully!', 'success');
+                    closeAddCourseModal();
+                    
+                    // Adicionar novo card ao DOM
+                    addCourseToGrid(data.data);
+                } else {
+                    showMessage(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error creating course:', error);
+                showMessage('Error creating course. Please try again.', 'error');
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    }
+});
+
+// Adicionar curso ao grid
+function addCourseToGrid(course) {
+    const coursesGrid = document.getElementById('courses-grid');
+    const addCourseCard = coursesGrid.querySelector('.add-course-card');
+    const noCourses = coursesGrid.querySelector('.no-courses');
+    
+    // Remover mensagem de "nenhum curso" se existir
+    if (noCourses) {
+        noCourses.remove();
+    }
+    
+    // Criar novo card
+    const courseCard = document.createElement('div');
+    courseCard.className = 'course-card';
+    courseCard.setAttribute('data-course-id', course.id);
+    
+    const imageUrl = course.image || 'assets/images/default-course.svg';
+    
+    courseCard.innerHTML = `
+        <div class="course-image" style="background-image: url('${imageUrl}');">
+            ${course.is_new ? '<span class="course-badge new">New</span>' : ''}
+        </div>
+        <div class="course-content">
+            <h3 class="course-title">${course.title}</h3>
+            <p class="course-description">${course.description}</p>
+            <div class="course-actions">
+                <button class="btn-course" onclick="viewCourse(${course.id})">VIEW COURSE</button>
+            </div>
+        </div>
+    `;
+    
+    // Inserir antes do card de adicionar
+    coursesGrid.insertBefore(courseCard, addCourseCard);
+    
+    // Animar entrada
+    courseCard.style.animation = 'slideUp 0.3s ease-out';
+}
+
+// Fechar modais ao clicar fora
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('modal')) {
+        if (e.target.id === 'addCourseModal') {
+            closeAddCourseModal();
+        }
+    }
+});
+
+// Fechar modais com ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeAddCourseModal();
+    }
+});

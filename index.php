@@ -1,6 +1,19 @@
 <?php
 
 require_once 'config/config.php';
+
+// Instanciar classe de curso
+$courseObj = new Course();
+
+// Buscar cursos do banco de dados
+try {
+    $courses = $courseObj->getAll();
+} catch (Exception $e) {
+    $courses = [];
+    if (APP_DEBUG) {
+        echo "Error loading data: " . $e->getMessage();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -132,70 +145,37 @@ require_once 'config/config.php';
                     <p>Gerencie e acompanhe o progresso dos seus cursos favoritos</p>
                 </div>
 
-                <div class="courses-grid">
-                    <!-- Card de Curso 1 -->
-                    <div class="course-card">
-                        <div class="course-image">
-                            <span class="course-badge new">Novo</span>
+                <div class="courses-grid" id="courses-grid">
+                    <?php if (!empty($courses)): ?>
+                        <?php foreach ($courses as $course): ?>
+                            <!-- Card de Curso -->
+                            <div class="course-card" data-course-id="<?php echo $course['id']; ?>">
+                                <div class="course-image" style="background-image: url('<?php echo !empty($course['image']) ? $course['image'] : 'assets/images/default-course.svg'; ?>');">
+                                    <?php if ($course['is_new']): ?>
+                                        <span class="course-badge new">New</span>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="course-content">
+                                    <h3 class="course-title"><?php echo htmlspecialchars($course['title']); ?></h3>
+                                    <p class="course-description"><?php echo htmlspecialchars($course['description']); ?></p>
+                                    <div class="course-actions">
+                                        <button class="btn-course" onclick="viewCourse(<?php echo $course['id']; ?>)">VIEW COURSE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="no-courses">
+                            <p>No courses registered yet. Click "Add Course" to get started!</p>
                         </div>
-                        <div class="course-content">
-                            <h3 class="course-title">PHP para Iniciantes</h3>
-                            <p class="course-description">Curso completo de PHP do básico ao avançado, com projetos práticos e exemplos reais.</p>
-                            <button class="btn-course" onclick="showCourseNotification()">VER CURSO</button>
-                        </div>
-                    </div>
-
-                    <!-- Card de Curso 2 -->
-                    <div class="course-card">
-                        <div class="course-image">
-                        </div>
-                        <div class="course-content">
-                            <h3 class="course-title">Design UI/UX</h3>
-                            <p class="course-description">Aprenda os fundamentos do design de interfaces e experiência do usuário.</p>
-                            <button class="btn-course" onclick="showCourseNotification()">VER CURSO</button>
-                        </div>
-                    </div>
-
-                    <!-- Card de Curso 3 -->
-                    <div class="course-card">
-                        <div class="course-image">
-                        </div>
-                        <div class="course-content">
-                            <h3 class="course-title">Marketing Digital</h3>
-                            <p class="course-description">Estratégias completas de marketing para o mundo digital e redes sociais.</p>
-                            <button class="btn-course" onclick="showCourseNotification()">VER CURSO</button>
-                        </div>
-                    </div>
-
-                    <!-- Card de Curso 4 -->
-                    <div class="course-card">
-                        <div class="course-image">
-                            <span class="course-badge new">Novo</span>
-                        </div>
-                        <div class="course-content">
-                            <h3 class="course-title">JavaScript Moderno</h3>
-                            <p class="course-description">Domine JavaScript ES6+ e desenvolva aplicações web modernas e interativas.</p>
-                            <button class="btn-course" onclick="showCourseNotification()">VER CURSO</button>
-                        </div>
-                    </div>
-
-                    <!-- Card de Curso 5 -->
-                    <div class="course-card">
-                        <div class="course-image">
-                        </div>
-                        <div class="course-content">
-                            <h3 class="course-title">React.js Fundamentals</h3>
-                            <p class="course-description">Aprenda a biblioteca mais popular do JavaScript para criar interfaces incríveis.</p>
-                            <button class="btn-course" onclick="showCourseNotification()">VER CURSO</button>
-                        </div>
-                    </div>
+                    <?php endif; ?>
 
                     <!-- Card para Adicionar Novo Curso -->
-                    <div class="course-card add-course-card">
+                    <div class="course-card add-course-card" onclick="showAddCourseModal()">
                         <div class="add-course-content">
                             <i class="bi bi-plus-circle-fill icon"></i>
-                            <h3>Adicionar Curso</h3>
-                            <p>Clique aqui para adicionar um novo curso à sua lista</p>
+                            <h3>Add Course</h3>
+                            <p>Click here to add a new course to your list</p>
                         </div>
                     </div>
                 </div>
@@ -249,6 +229,47 @@ require_once 'config/config.php';
             </div>
         </div>
     </footer>
+
+    <!-- Modal para Adicionar Curso -->
+    <div id="addCourseModal" class="modal">
+        <div class="modal-content course-modal">
+            <div class="modal-header">
+                <h2>Add New Course</h2>
+                <button class="modal-close" onclick="closeAddCourseModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addCourseForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="courseTitle">Course Title *</label>
+                        <input type="text" id="courseTitle" name="title" required placeholder="e.g. PHP for Beginners">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="courseDescription">Description *</label>
+                        <textarea id="courseDescription" name="description" required placeholder="Describe the course content..." rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="courseImage">Course Image</label>
+                        <input type="file" id="courseImage" name="image" accept="image/*">
+                        <small class="form-help">Accepted formats: JPG, PNG, WebP (max. 2MB)</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="courseIsNew" name="is_new" checked>
+                            Mark as new course
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeAddCourseModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Add Course</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script src="assets/js/script.js"></script>
 </body>
