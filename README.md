@@ -18,12 +18,11 @@ https://github.com/user-attachments/assets/ab078242-25a6-4254-a5cd-170e60ea1634
 
 ## Funcionalidades
 
-- Design responsivo (mobile, tablet, desktop)
-- Modal de boas-vindas
-- Slider de apresentação automático
-- Sistema de busca
-- Cards de cursos organizados
-- Interface moderna com Bootstrap Icons
+- [x] Design responsivo (mobile, tablet, desktop)
+- [x] Modal de boas-vindas
+- [x] Slider de apresentação automático
+- [x] Cards de cursos organizados
+- [x] CRUD de cursos
 
 ## Tecnologias
 
