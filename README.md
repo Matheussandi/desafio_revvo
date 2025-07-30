@@ -1,134 +1,144 @@
 # Meus Cursos
 
-Plataforma web para gerenciamento de cursos online.
+Plataforma web para gerenciamento de cursos online com PHP, MySQL e Docker.
 
-## Funcionalidades
+## 🚀 Execução Rápida
 
-- [x] Design responsivo (mobile, tablet, desktop)
-- [x] Modal de boas-vindas
-- [x] Slider de apresentação automático
-- [x] Cards de cursos organizados
-- [x] CRUD de cursos
-
-## Tecnologias
-
-**Frontend:**
-- HTML5, CSS3, JavaScript ES6+
-- Bootstrap Icons
-
-**Backend:**
-- PHP 8.2
-- Apache
-
-**Database:**
-- MySQL 8.0
-
-**DevOps:**
-- Docker & Docker Compose
-- phpMyAdmin
-
-## Como Executar
-
-### Pré-requisitos
-- Docker e Docker Compose
-- Git
-
-### Instalação
-
-1. **Clone o repositório:**
 ```bash
 git clone <URL_DO_REPOSITORIO>
-cd <NOME_DO_PROJETO>
-```
-
-2. **Configure as permissões:**
-```bash
+cd desafio_revvo
 chmod +x setup-permissions.sh
 ./setup-permissions.sh
-```
-
-3. **Execute com Docker:**
-```bash
 docker compose up --build
 ```
 
-4. **Acesse a aplicação:**
+**Acesso:**
 - Site: http://localhost:8080
 - phpMyAdmin: http://localhost:8081
 
-## Estrutura do Projeto
+## 📋 Pré-requisitos
+
+- Docker e Docker Compose
+- Git
+
+## 🛠️ Tecnologias
+
+- **Frontend:** HTML5, CSS3, JavaScript, Bootstrap Icons
+- **Backend:** PHP 8.2, Apache
+- **Banco:** MySQL 8.0
+- **DevOps:** Docker, phpMyAdmin
+
+## 📁 Estrutura
 
 ```
-projeto/
+desafio_revvo/
 ├── index.php              # Página principal
-├── course.php             # Página de curso
+├── course.php             # Página do curso
+├── api/courses.php        # API REST
 ├── config/                # Configurações
-├── api/                   # API endpoints
-├── assets/                # CSS, JS e imagens
-├── database/              # Scripts SQL
-├── docker-compose.yml     # Docker
-└── Dockerfile            # Imagem PHP
+├── assets/                # CSS, JS, imagens
+├── database/init.sql      # Script do banco
+└── docker-compose.yml     # Docker
 ```
 
-## Configuração
-
-O projeto usa variáveis de ambiente no arquivo `.env`:
+## ⚙️ Configuração (.env)
 
 ```env
-# Banco de Dados
+# Docker (padrão)
 DB_HOST=db
-DB_NAME=meus_cursos
+DB_NAME=leo_learning
 DB_USER=user
 DB_PASS=user123
-
-# Aplicação
-APP_ENV=development
-APP_DEBUG=true
 SITE_NAME=LEO Learning
 ```
 
-## Banco de Dados
-
-**Acesso:**
-- **Host:** localhost:3306
-- **Usuário:** user / Senha: user123
-- **Root:** root / Senha: root123
-
-**Via phpMyAdmin:** http://localhost:8081
-
-## Comandos Úteis
+## 🔧 Comandos Úteis
 
 ```bash
-# Ver status dos containers
+# Ver status
 docker compose ps
 
-# Parar containers
+# Parar
 docker compose down
 
-# Ver logs
+# Logs
 docker compose logs -f
 
-# Rebuild
-docker compose down
-docker compose up -d --build
+# Reconstruir
+docker compose down && docker compose up --build
 ```
 
-## Troubleshooting
+## 🆘 Problemas Comuns
 
-**Porta em uso:**
+**Porta ocupada:**
 ```bash
 sudo lsof -i :8080
+kill -9 PID
 ```
 
-**Problemas de permissão:**
+**Permissões:**
 ```bash
 sudo chown -R $USER:$USER .
-chmod -R 755 assets/
+chmod -R 777 assets/images/courses/
 ```
 
 **Container não inicia:**
 ```bash
 docker compose logs
 docker compose down -v
-docker compose up -d --build
+docker compose up --build
+```
+
+## 🚀 Execução Sem Docker (Alternativa)
+
+<details>
+<summary>Clique para expandir instruções locais</summary>
+
+### Pré-requisitos
+- PHP 8.2+, MySQL 8.0+, Apache/Nginx
+
+### Passos
+1. Clone e configure:
+```bash
+git clone <URL_DO_REPOSITORIO>
+cd desafio_revvo
+cp .env.example .env
+```
+
+2. Configure `.env` para local:
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=sua_senha
+```
+
+3. Configure banco:
+```bash
+mysql -u root -p < database/init.sql
+```
+
+4. Inicie servidor:
+```bash
+php -S localhost:8080
+```
+
+</details>
+
+## 📋 Funcionalidades
+
+- ✅ Design responsivo
+- ✅ Modal de boas-vindas
+- ✅ Carrossel automático
+- ✅ CRUD de cursos
+- ✅ Upload de imagens
+- ✅ API REST
+
+## 🔗 API Endpoints
+
+```http
+GET    /api/courses.php     # Listar cursos
+GET    /api/courses.php?id=1 # Buscar por ID
+POST   /api/courses.php     # Criar curso
+PUT    /api/courses.php?id=1 # Atualizar curso
+DELETE /api/courses.php?id=1 # Deletar curso
 ```
