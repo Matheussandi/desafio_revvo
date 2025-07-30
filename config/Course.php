@@ -1,7 +1,4 @@
 <?php
-/**
- * Course Management Class
- */
 
 class Course {
     private $db;
@@ -12,7 +9,7 @@ class Course {
     }
     
     /**
-     * Get all courses
+     * Pegar todos os cursos
      */
     public function getAll() {
         try {
@@ -28,7 +25,7 @@ class Course {
     }
     
     /**
-     * Get course by ID
+     * Pegar curso por ID
      */
     public function getById($id) {
         try {
@@ -45,7 +42,7 @@ class Course {
     }
     
     /**
-     * Create new course
+     * Cria novo curso
      */
     public function create($data) {
         try {
@@ -67,7 +64,7 @@ class Course {
     }
     
     /**
-     * Update course
+     * Atualiza curso
      */
     public function update($id, $data) {
         try {
@@ -93,11 +90,11 @@ class Course {
     }
     
     /**
-     * Delete course
+     * Deleta curso
      */
     public function delete($id) {
         try {
-            // Get course image before deleting
+            // Obtém dados do curso para excluir a imagem
             $course = $this->getById($id);
             
             $sql = "DELETE FROM courses WHERE id = :id";
@@ -107,7 +104,7 @@ class Course {
             
             $result = $stmt->execute();
             
-            // Delete image file if exists
+            // Exclui imagem do servidor se existir
             if ($result && $course && !empty($course['image'])) {
                 $imagePath = '../' . $course['image'];
                 if (file_exists($imagePath)) {

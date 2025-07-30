@@ -1,7 +1,4 @@
 <?php
-/**
- * Configurações do Sistema Meus Cursos
- */
 
 // Carregar variáveis de ambiente
 require_once __DIR__ . '/env.php';

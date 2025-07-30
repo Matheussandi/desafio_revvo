@@ -1,17 +1,12 @@
 <?php
-/**
- * Course API endpoint
- */
 
 require_once '../config/config.php';
 
-// Configure headers for AJAX
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// Function to return JSON response
 function jsonResponse($success, $message, $data = null) {
     echo json_encode([
         'success' => $success,
@@ -27,7 +22,7 @@ try {
     
     switch ($action) {
         case 'create':
-            // Validate required data
+            // Valida dados obrigatórios
             $title = trim($_POST['title'] ?? '');
             $description = trim($_POST['description'] ?? '');
             $is_new = isset($_POST['is_new']) ? (bool)$_POST['is_new'] : true;
@@ -36,12 +31,12 @@ try {
                 jsonResponse(false, 'Título e descrição são obrigatórios.');
             }
             
-            // Process image upload
+            // Processa upload da imagem
             $image = '';
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $uploadDir = '../assets/images/courses/';
                 
-                // Create directory if it doesn't exist with proper permissions
+                // Cria diretório se não existir com permissões adequadas
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0775, true);
                     chmod($uploadDir, 0775);
@@ -102,7 +97,7 @@ try {
                 jsonResponse(false, 'ID do curso é obrigatório.');
             }
             
-            // Validate required data
+            // Valida dados obrigatórios
             $title = trim($_POST['title'] ?? '');
             $description = trim($_POST['description'] ?? '');
             $is_new = isset($_POST['is_new']) ? (bool)$_POST['is_new'] : true;
@@ -111,15 +106,15 @@ try {
                 jsonResponse(false, 'Título e descrição são obrigatórios.');
             }
             
-            // Get current course data
+            // Obtém dados do curso atual
             $currentCourse = $course->getById($id);
             if (!$currentCourse) {
                 jsonResponse(false, 'Curso não encontrado.');
             }
             
-            $image = $currentCourse['image']; // Keep current image by default
+            $image = $currentCourse['image']; // Mantém imagem atual por padrão
             
-            // Process image upload if new image provided
+            // Processa upload da imagem se nova imagem for fornecida
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 $uploadDir = '../assets/images/courses/';
                 
@@ -136,7 +131,7 @@ try {
                     $uploadPath = $uploadDir . $fileName;
                     
                     if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
-                        // Delete old image if exists
+                        // Exclui imagem antiga se existir
                         if (!empty($currentCourse['image'])) {
                             $oldImagePath = '../' . $currentCourse['image'];
                             if (file_exists($oldImagePath)) {

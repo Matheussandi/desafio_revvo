@@ -1,7 +1,4 @@
 <?php
-/**
- * Classe para conexão com o banco de dados
- */
 
 class Database {
     private $host;

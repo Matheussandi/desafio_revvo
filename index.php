@@ -2,10 +2,8 @@
 
 require_once 'config/config.php';
 
-// Instanciar classe de curso
 $courseObj = new Course();
 
-// Buscar cursos do banco de dados
 try {
     $courses = $courseObj->getAll();
 } catch (Exception $e) {

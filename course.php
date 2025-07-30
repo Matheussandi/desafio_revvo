@@ -8,10 +8,8 @@ if ($courseId <= 0) {
     exit;
 }
 
-// Instantiate course class
 $courseObj = new Course();
 
-// Fetch specific course
 try {
     $course = $courseObj->getById($courseId);
     if (!$course) {
@@ -28,7 +26,7 @@ try {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
