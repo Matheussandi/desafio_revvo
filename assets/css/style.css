@@ -267,8 +267,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), 
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23f0f2f5" width="1200" height="600"/><circle fill="%23e1e5e9" cx="200" cy="150" r="60"/><circle fill="%23d1d9e0" cx="800" cy="400" r="80"/><rect fill="%23c1ccd7" x="500" y="200" width="200" height="150" rx="10"/></svg>');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -276,6 +274,57 @@ body {
     justify-content: center;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
+}
+
+.slide:nth-child(1) {
+    background: url('/assets/images/carousel_1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.slide:nth-child(1)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.slide:nth-child(2) {
+    background: url('/assets/images/carousel_2.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.slide:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.slide:nth-child(3) {
+    background: url('/assets/images/carousel_3.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.slide:nth-child(3)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
 
 .slide.active {
@@ -287,19 +336,22 @@ body {
     color: white;
     max-width: 600px;
     padding: 0 2rem;
+    position: relative;
+    z-index: 2;
 }
 
 .slide-content h2 {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    text-shadow: 0 4px 8px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6);
 }
 
 .slide-content p {
     font-size: 1.3rem;
     margin-bottom: 2rem;
     opacity: 0.95;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 .btn-hero {
