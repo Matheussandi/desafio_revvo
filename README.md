@@ -1,20 +1,6 @@
-# LEO Learning - Meus Cursos
+# Meus Cursos
 
-Plataforma web para gerenciamento de cursos online com interface responsiva desenvolvida em PHP.
-
-## Apresentação
-
-### Página inicial
-https://github.com/user-attachments/assets/54f14ace-11d5-48d3-9e1b-a8e4b0ec9650
-
-### Adicionar curso
-https://github.com/user-attachments/assets/eacf775e-9da9-4143-b3ee-0e195a2726d7
-
-### Detalhe do curso
-https://github.com/user-attachments/assets/a0919e26-888b-4f23-befc-db24ad3882ab
-
-### Responsivo
-https://github.com/user-attachments/assets/ab078242-25a6-4254-a5cd-170e60ea1634
+Plataforma web para gerenciamento de cursos online.
 
 ## Funcionalidades
 
@@ -51,8 +37,8 @@ https://github.com/user-attachments/assets/ab078242-25a6-4254-a5cd-170e60ea1634
 
 1. **Clone o repositório:**
 ```bash
-git clone https://github.com/Matheussandi/desafio_revvo.git
-cd desafio_revvo
+git clone <URL_DO_REPOSITORIO>
+cd <NOME_DO_PROJETO>
 ```
 
 2. **Configure as permissões:**
@@ -73,7 +59,7 @@ docker compose up --build
 ## Estrutura do Projeto
 
 ```
-desafio_revvo/
+projeto/
 ├── index.php              # Página principal
 ├── course.php             # Página de curso
 ├── config/                # Configurações
@@ -146,7 +132,3 @@ docker compose logs
 docker compose down -v
 docker compose up -d --build
 ```
-
-## Autor
-
-**Matheus Sandi** - [GitHub](https://github.com/Matheussandi)
