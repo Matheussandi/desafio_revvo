@@ -829,7 +829,7 @@ footer {
 }
 
 .modal-cta {
-    background: linear-gradient(135deg, #00bcd4 0%, #2196f3 100%);
+    background-color: #667eea;
     color: white;
     border: none;
     padding: 15px 40px;
@@ -846,8 +846,9 @@ footer {
 }
 
 .modal-cta:hover {
+    background-color: #5a67d8;
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
 /* Responsive para Modal */
